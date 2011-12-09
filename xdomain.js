@@ -26,17 +26,17 @@ function listenToClicks()
 	var domains=["domain1.com", "domain2.com"];
 	var fileTypes=[".doc", ".xls", ".exe", ".zip", ".pdf", ".mov", ".mp3"];
 
-	jQuery('a').each(function(index) {
+	jQuery("a").each(function(index) {
  		var link = jQuery(this);
 		var href = link.attr('href');
 		
 		jQuery.each(fileTypes, function(i) {
-			if(jQuery(link).attr('href').indexOf(this)!=-1){
+			if(jQuery(link).attr("href").indexOf(this)!=-1){
 				valid = false;
-				jQuery(link).bind('click', function(c) {
+				jQuery(link).bind("click", function(c) {
 					c.preventDefault();
-	                _gat._getTrackerByName()._trackEvent('Download', 'Click - ' + jQuery(link).attr('href'));
-	                setTimeout('document.location = "' + jQuery(link).attr('href') + '"', 100);
+	                _gat._getTrackerByName()._trackEvent("Download", "Click - " + jQuery(link).attr("href"));
+	                setTimeout("document.location = '" + jQuery(link).attr("href") + "'", 100);
 	            });
 			}
 		});
@@ -45,22 +45,22 @@ function listenToClicks()
 		jQuery.each(domains, function(j) {
 			try
 			{
-				if((jQuery(link).attr('href').indexOf(this)!=-1)&&(window.location.href.indexOf(this)==-1)){	
+				if((jQuery(link).attr("href").indexOf(this)!=-1)&&(window.location.href.indexOf(this)==-1)){	
 					valid = true;
 
 					if (valid)
 					{
-						jQuery(link).bind('click', function(l) {
+						jQuery(link).bind("click", function(l) {
 							if(typeof(_gat)=="object"){
 								l.preventDefault();
-								if (jQuery(link).attr('target') != "_blank")
+								if (jQuery(link).attr("target") != "_blank")
 								{
-									_gaq.push(['_link',jQuery(link).attr('href')]);
+									_gaq.push(["_link",jQuery(link).attr("href")]);
 								}
 						 		else
 						 		{
 				 					var tracker = _gat._getTrackerByName();
-									var fullUrl = tracker._getLinkerUrl(jQuery(link).attr('href'));
+									var fullUrl = tracker._getLinkerUrl(jQuery(link).attr("href"));
 									window.open(fullUrl);
 						 		}
 							}
@@ -78,10 +78,10 @@ function listenToClicks()
 		var rootDomain = document.domain.split(".")[document.domain.split(".").length - 2] + "." + document.domain.split(".")[document.domain.split(".").length - 1];
 
 		if ( (href.match(/^http/)) && (href.indexOf(rootDomain) == -1) && !valid) {
-			jQuery(link).bind('click', function(d) {
+			jQuery(link).bind("click", function(d) {
 					d.preventDefault();
-			      	_gat._getTrackerByName()._trackEvent('Outbound Link', href);
-			    	setTimeout('document.location = "' + href + '"', 100);
+			      	_gat._getTrackerByName()._trackEvent("Outbound Link", href);
+			    	setTimeout("document.location = '" + href + "'", 100);
 			    });			   
 		}
 	});
