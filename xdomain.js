@@ -48,24 +48,21 @@ function listenToClicks()
 				if((jQuery(link).attr("href").indexOf(this)!=-1)&&(window.location.href.indexOf(this)==-1)){	
 					valid = true;
 
-					if (valid)
-					{
-						jQuery(link).bind("click", function(l) {
-							if(typeof(_gat)=="object"){
-								l.preventDefault();
-								if (jQuery(link).attr("target") != "_blank")
-								{
-									_gaq.push(["_link",jQuery(link).attr("href")]);
-								}
-						 		else
-						 		{
-				 					var tracker = _gat._getTrackerByName();
-									var fullUrl = tracker._getLinkerUrl(jQuery(link).attr("href"));
-									window.open(fullUrl);
-						 		}
+					jQuery(link).bind("click", function(l) {
+						if(typeof(_gat)=="object"){
+							l.preventDefault();
+							if (jQuery(link).attr("target") != "_blank")
+							{
+								_gaq.push(["_link",jQuery(link).attr("href")]);
 							}
-						});
-					}
+					 		else
+					 		{
+				 				var tracker = _gat._getTrackerByName();
+								var fullUrl = tracker._getLinkerUrl(jQuery(link).attr("href"));
+								window.open(fullUrl);
+					 		}
+						}
+					});
 				}
 								
 			}
